@@ -3,12 +3,11 @@ const request = require('request');
 const querystring = require('querystring');
 
 router.route('/').get((req, res) => {
-  res.json("working-yes");
-  /*
   let redirect_uri = process.env.NODE_ENV === 'production' ? 
                       FRONTEND_BASE_PROD :
                       "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
-
+  res.json("post-redirect-set?-yes");
+                      /*
   res.json('http://www.strava.com/oauth/authorize?' + 
   querystring.stringify({
   response_type: 'code',
