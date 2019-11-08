@@ -8,21 +8,25 @@ router.route('/').get((req, res) => {
 
   if (process.env.NODE_ENV == 'production') {
     console.log("IN PRODUCTION!");
-  }
-  
-  /*
-  let redirect_uri = "http://" + req.headers.host +  
-                     process.env.STRAVA_AUTH_REDIRECT_URI;
-  
-  res.json('http://www.strava.com/oauth/authorize?' + 
-  querystring.stringify({
+
+    let redirect_uri = "http://" + req.headers.host +  
+    process.env.STRAVA_AUTH_REDIRECT_URI;
+
+    res.json('http://www.strava.com/oauth/authorize?' + 
+    querystring.stringify({
     response_type: 'code',
     client_id: process.env.STRAVA_CLIENT_ID,
     scope: process.env.STRAVA_SCOPE,
     approval_prompt: process.env.APPROVAL_PROMPT,
     redirect_uri 
-  }))
-  */ 
+    }))
+  } else {
+    res.redirect("https://www.google.com");
+  }
+
+  
+
+  
 }); 
 
 router.route('/callback').get((req, res) => {
