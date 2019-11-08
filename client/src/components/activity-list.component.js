@@ -42,7 +42,7 @@ export default class ActivityList extends Component {
   }
     
   getAndSetActivities(token) {
-    axios.get('http://192.168.1.103:5000/api/activities', { 
+    axios.get('/api/activities', { 
       params: {
         't': token
       }

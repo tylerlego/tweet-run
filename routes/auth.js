@@ -3,14 +3,12 @@ const request = require('request');
 const querystring = require('querystring');
 
 router.route('/').get((req, res) => {
-  console.log("IN AUTH");
-  console.log(process.env.NODE_ENV);
-
   if (process.env.NODE_ENV == 'production') {
     res.redirect("https://www.google.com");
   } else {
-    let redirect_uri = "http://" + req.headers.host +  
-    process.env.STRAVA_AUTH_REDIRECT_URI;
+    let redirect_uri = process.env.NODE_ENV === 'production' ? 
+                        "https://mighty-wildwood-70436.herokuapp.com/" :
+                        "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
 
     res.json('http://www.strava.com/oauth/authorize?' + 
     querystring.stringify({
@@ -29,8 +27,10 @@ router.route('/').get((req, res) => {
 
 router.route('/callback').get((req, res) => {
   let code = req.query.code || null;
-  let redirect_uri = "http://" + req.headers.host +  
-                     process.env.STRAVA_AUTH_REDIRECT_URI;
+
+  let redirect_uri = process.env.NODE_ENV === 'production' ? 
+                      "https://mighty-wildwood-70436.herokuapp.com/" :
+                      "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
 
   let stravaAuthOptions = {
     url: 'https://www.strava.com/oauth/token',
@@ -55,12 +55,13 @@ router.route('/callback').get((req, res) => {
     }
 
     var access_token = data.access_token;
-    console.log(req);
 
-    res.redirect(req.headers.referer + "?t=" + access_token);
-  })
-
-  
+    let finish = process.env.NODE_ENV === 'production' ? 
+                    process.env.FRONTEND_BASE_PROD + "?t=" + access_token :
+                    process.env.FRONTEND_BASE_DEV + "?t=" + access_token;
+                    console.log(finish);
+    res.redirect(finish);
+  })  
 })
 
  
