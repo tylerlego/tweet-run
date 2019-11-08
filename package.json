@@ -6,11 +6,40 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "private": true,
   "dependencies": {
     "express": "^4.17.1",
-    "password-generator": "^2.2.3"
+    "password-generator": "^2.2.3",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "moment": "^2.24.0",
+    "query-string": "^6.8.3",
+    "querystring": "^0.2.0",
+    "react": "^16.8.6",
+    "react-datepicker": "^2.9.6",
+    "react-dom": "^16.8.6",
+    "react-oauth-flow": "^1.2.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "twit": "^2.2.11",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0"
   },
   "scripts": {
     "start": "node index.js"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
