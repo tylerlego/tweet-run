@@ -3,34 +3,26 @@ const request = require('request');
 const querystring = require('querystring');
 
 router.route('/').get((req, res) => {
-  if (process.env.NODE_ENV == 'production') {
-    res.redirect("https://www.google.com");
-  } else {
-    let redirect_uri = process.env.NODE_ENV === 'production' ? 
-                        "https://mighty-wildwood-70436.herokuapp.com/" :
-                        "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
-
-    res.json('http://www.strava.com/oauth/authorize?' + 
-    querystring.stringify({
-    response_type: 'code',
-    client_id: process.env.STRAVA_CLIENT_ID,
-    scope: process.env.STRAVA_SCOPE,
-    approval_prompt: process.env.APPROVAL_PROMPT,
-    redirect_uri 
-    }))
-  }
-
-  
-
-  
+  let redirect_uri = process.env.NODE_ENV === 'production' ? 
+                      process.env.FRONTEND_BASE_PROD :
+                      process.env.FRONTEND_BASE_DEV + process.env.STRAVA_AUTH_REDIRECT_URI;
+  console.log(redirect_uri);
+  res.json('http://www.strava.com/oauth/authorize?' + 
+  querystring.stringify({
+  response_type: 'code',
+  client_id: process.env.STRAVA_CLIENT_ID,
+  scope: process.env.STRAVA_SCOPE,
+  approval_prompt: process.env.APPROVAL_PROMPT,
+  redirect_uri 
+  }))
 }); 
 
 router.route('/callback').get((req, res) => {
   let code = req.query.code || null;
 
   let redirect_uri = process.env.NODE_ENV === 'production' ? 
-                      "https://mighty-wildwood-70436.herokuapp.com/" :
-                      "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
+                      process.env.FRONTEND_BASE_PROD :
+                      process.env.FRONTEND_BASE_DEV + process.env.STRAVA_AUTH_REDIRECT_URI;
 
   let stravaAuthOptions = {
     url: 'https://www.strava.com/oauth/token',
