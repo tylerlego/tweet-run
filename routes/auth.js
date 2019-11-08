@@ -4,8 +4,11 @@ const querystring = require('querystring');
 
 router.route('/').get((req, res) => {
   let redirect_uri = process.env.NODE_ENV === 'production' ? 
-                      process.env.FRONTEND_BASE_PROD :
+                      process.env.FRONTEND_BASE_PROD + process.env.STRAVA_AUTH_REDIRECT_URI :
                       "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
+
+  console.log("1 // " + process.env.FRONTEND_BASE_PROD + process.env.STRAVA_AUTH_REDIRECT_URI);
+  console.log("http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI);
 
   res.json('http://www.strava.com/oauth/authorize?' + 
   querystring.stringify({
@@ -21,8 +24,11 @@ router.route('/callback').get((req, res) => {
   let code = req.query.code || null;
 
   let redirect_uri = process.env.NODE_ENV === 'production' ? 
-                      process.env.FRONTEND_BASE_PROD :
+                      process.env.FRONTEND_BASE_PROD + process.env.STRAVA_AUTH_REDIRECT_URI :
                       "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;
+
+  console.log("2 // " + process.env.FRONTEND_BASE_PROD + process.env.STRAVA_AUTH_REDIRECT_URI);
+  console.log("http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI);
 
   let stravaAuthOptions = {
     url: 'https://www.strava.com/oauth/token',
@@ -51,7 +57,10 @@ router.route('/callback').get((req, res) => {
     let finish = process.env.NODE_ENV === 'production' ? 
                     process.env.FRONTEND_BASE_PROD + "?t=" + access_token :
                     process.env.FRONTEND_BASE_DEV + "?t=" + access_token;
-                    console.log(finish);
+
+    console.log("3 // " + process.env.FRONTEND_BASE_PROD + "?t=" + access_token);
+    console.log(process.env.FRONTEND_BASE_DEV + "?t=" + access_token);   
+
     res.redirect(finish);
   })  
 })
