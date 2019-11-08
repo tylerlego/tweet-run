@@ -3,7 +3,7 @@ const request = require('request');
 const querystring = require('querystring');
 
 router.route('/').get((req, res) => {
-  res.json({"working": "yes"});
+  res.json("working-yes");
   /*
   let redirect_uri = process.env.NODE_ENV === 'production' ? 
                       FRONTEND_BASE_PROD :
