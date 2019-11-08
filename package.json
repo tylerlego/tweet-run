@@ -28,7 +28,8 @@
     "twit": "^2.2.11"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "browserslist": {
     "production": [
