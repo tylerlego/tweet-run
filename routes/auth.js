@@ -2,7 +2,7 @@ const router = require('express').Router();
 const request = require('request');
 const querystring = require('querystring');
 
-router.route('/').get((req, res) => {]
+router.route('/').get((req, res) => {
   res.json({"working": "yes"});
   /*
   let redirect_uri = process.env.NODE_ENV === 'production' ? 
