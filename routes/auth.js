@@ -5,6 +5,11 @@ const querystring = require('querystring');
 router.route('/').get((req, res) => {
   console.log("IN AUTH");
   console.log(process.env.NODE_ENV);
+
+  if (process.env.NODE_ENV == 'production') {
+    console.log("IN PRODUCTION!");
+  }
+  
   /*
   let redirect_uri = "http://" + req.headers.host +  
                      process.env.STRAVA_AUTH_REDIRECT_URI;
