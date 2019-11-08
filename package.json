@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "keywords": [],
-  "author": "",
+  "author": "Tyler Lego <tylerlego15@gmail.com>",
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "express": "^4.17.1",
-    "password-generator": "^2.2.3",
     "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
+    "password-generator": "^2.2.3",
     "query-string": "^6.8.3",
     "querystring": "^0.2.0",
     "react": "^16.8.6",
@@ -22,10 +25,7 @@
     "react-oauth-flow": "^1.2.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "twit": "^2.2.11",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.0.0"
+    "twit": "^2.2.11"
   },
   "scripts": {
     "start": "node index.js"
