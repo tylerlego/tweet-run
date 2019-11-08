@@ -61,7 +61,7 @@ export default class ActivityList extends Component {
   }
 
   getAndSetTweets(max_id = 0) {
-    let url = "http://192.168.1.103:5000/api/tweets/";
+    let url = "/api/tweets/";
 
     axios.get(url + max_id)
     .then(response => {
