@@ -7,8 +7,8 @@ router.route('/').get((req, res) => {
   console.log(process.env.NODE_ENV);
 
   if (process.env.NODE_ENV == 'production') {
-    console.log("IN PRODUCTION!");
-
+    res.redirect("https://www.google.com");
+  } else {
     let redirect_uri = "http://" + req.headers.host +  
     process.env.STRAVA_AUTH_REDIRECT_URI;
 
@@ -20,8 +20,6 @@ router.route('/').get((req, res) => {
     approval_prompt: process.env.APPROVAL_PROMPT,
     redirect_uri 
     }))
-  } else {
-    res.redirect("https://www.google.com");
   }
 
   
