@@ -4,6 +4,7 @@ const querystring = require('querystring');
 const ENV = process.env.NODE_ENV;
 
 router.route('/').get((req, res) => {
+  
   let redirect_uri = ENV === 'production' ? 
                       process.env.FRONTEND_BASE_PROD + process.env.STRAVA_AUTH_REDIRECT_URI :
                       "http://" + req.headers.host + process.env.STRAVA_AUTH_REDIRECT_URI;

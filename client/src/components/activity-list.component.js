@@ -4,6 +4,8 @@ import querystring from 'querystring';
 import Activity from './activity.component';
 import Tweet from './tweet.component';
 import TweetRun from './tweet-run.component';
+import GettingActivities from './getting-activities.component';
+import ActivitiesFailed from './activities-failed.component';
 
 export default class ActivityList extends Component {
   constructor(props) {
@@ -17,7 +19,9 @@ export default class ActivityList extends Component {
 
     this.state = {
       activities: [],
-      tweets: []
+      activities_failed: false,
+      tweets: [],
+      tweets_loaded: false
     };
   }
 
@@ -48,15 +52,20 @@ export default class ActivityList extends Component {
       }
     })
     .then(response => {
-      let activities = response.data;
-
-      this.setState({
-        activities: activities
-      });
+      if (response.data != null) {
+        let activities = response.data;
+  
+        this.setState({
+          activities: activities
+        });
+      } else {
+        this.setState({
+          activities_failed: true
+        });
+      }
     })
-    .catch(error => {
+    .catch(error => { // handle json response
       console.log(error);
-      //display message that token is bad, reload page
     });
   }
 
@@ -65,26 +74,27 @@ export default class ActivityList extends Component {
 
     axios.get(url + max_id)
     .then(response => {
-      let currentState = this.state.tweets;
-      let tweets = currentState.concat(response.data);
-      let activities = this.state.activities;
-
-      this.setState({
-        tweets: tweets
-      });
-      let oldest_act = activities[activities.length - 1];
-      let oldest_tweet = tweets[tweets.length - 1];
-
-      if (oldest_act.start_date < oldest_tweet.created_at) {
-        this.getAndSetTweets(oldest_tweet.id);
-      } else {
-        console.log("Enough tweets loaded!");
-        tweets = this.state.tweets;
-        activities = this.state.activities;
-
-        this.setTweetsInActivities(activities, tweets);
+      if (this.state.activities.length > 0) {
+        let currentState = this.state.tweets;
+        let tweets = currentState.concat(response.data);
+        let activities = this.state.activities;
+  
+        this.setState({
+          tweets: tweets
+        });
+        let oldest_act = activities[activities.length - 1];
+        let oldest_tweet = tweets[tweets.length - 1];
+  
+        if (oldest_act.start_date < oldest_tweet.created_at) {
+          this.getAndSetTweets(oldest_tweet.id);
+        } else {
+          console.log("Enough tweets loaded!");
+          tweets = this.state.tweets;
+          activities = this.state.activities;
+  
+          this.setTweetsInActivities(activities, tweets);
+        }
       }
-
     })
     .catch(error => {
       console.log("Cannot get tweets: " + error);
@@ -109,7 +119,8 @@ export default class ActivityList extends Component {
     }
 
     this.setState({
-      activities: activities
+      activities: activities,
+      tweets_loaded: true
     })
   }
 
@@ -147,33 +158,43 @@ export default class ActivityList extends Component {
 
   renderTweetRun() {
     let elements = []; 
-      
-      for (let i = 0; i < this.state.activities.length; i++) {
-        let activity = this.state.activities[i];
+       
+    for (let i = 0; i < this.state.activities.length; i++) {
+      let activity = this.state.activities[i];
 
-        elements.push(
-          <div className="col-md-6 col-lg-4 activity-card" key={i} >
-            <TweetRun data={activity}/>
-          </div>
-        );
-      }
-      return elements;
+      elements.push(
+        <div className="col-md-6 col-lg-4 activity-card" key={i} >
+          <TweetRun data={activity}/>
+        </div>
+      );
     }
-    
 
+    return elements;
+  }
+    
   render() {
-    return ( 
-      <div className="container">
-        <div className="jumbotron">        
-        <h1 className="display-4">Recent Activities:</h1>
-        </div>
-        <div className="row">
-          {this.renderTweetRun()}
-        </div>
-        {/*this.renderActivities()*/}
-        {/*this.renderTweets()*/}
-      </div> 
-    )
+    if (!this.state.activities_failed) {
+      if (this.state.tweets_loaded) {
+        return ( 
+          <div className="container">
+            <div className="jumbotron">        
+              <h1 className="display-4">Recent Activities:</h1>
+            </div>
+            <div className="row">
+              {this.renderTweetRun()}
+            </div>
+          </div> 
+        )
+      } else {
+        return (
+          <GettingActivities />
+        )
+      }
+    } else {
+      return (
+        <ActivitiesFailed />
+      )
+    }
   }
 }
 

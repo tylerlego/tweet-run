@@ -4,7 +4,7 @@ import moment from 'moment';
 export default class TweetRun extends Component {
     render(props) {
       let numTimesString = '';
-      if (this.props.data.tweets.length > 0) {
+      if (this.props.data.tweets) {
         let times = this.props.data.tweets.length
         numTimesString = 'Donald Trump tweeted ' + times + ' times!';
       }

@@ -6,11 +6,11 @@ router.route('/').get((req,res) => {
   getStatuses(req, res);
 });
 
-router.route('/:id').get((req,res) => {  
+router.route('/:id').get((req,res) => {
   getStatuses(req, res);
 });
 
-function getStatuses(req, res) {
+function getStatuses(req, res, count) {
   const T = new Twit({
     consumer_key:         process.env.TWITTER_API_KEY,
     consumer_secret:      process.env.TWITTER_API_SECRET_KEY,
@@ -25,7 +25,6 @@ function getStatuses(req, res) {
   }
 
   if (req.params.id != 0) {
-    console.log('getting...');
     options.max_id = req.params.id;
   }
   
@@ -52,7 +51,6 @@ function getStatuses(req, res) {
     if (tweets.length < 50) {
       getStatuses(req, res);
     } else {
-      console.log('Done!');
       res.json(tweets); 
     }    
   })
