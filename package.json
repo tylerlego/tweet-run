@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
     "mongoose": "^5.7.8",
     "password-generator": "^2.2.3",
     "query-string": "^6.8.3",
