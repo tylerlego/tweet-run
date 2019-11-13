@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TweetRun from './tweet-run.component';
+import { Container, Row, Col, Button,  } from 'react-bootstrap'
 
 export default class ActivityList extends Component {
     constructor(props) {
@@ -13,9 +14,9 @@ export default class ActivityList extends Component {
         let activity = this.props.data.activities[i];
   
         elements.push(
-          <div className="col-md-6 col-lg-4 activity-card" key={i} >
+          <Col lg={4} className="activity-card" key={i} >
             <TweetRun data={activity}/>
-          </div>
+          </Col>
         );
       }
   
@@ -25,14 +26,11 @@ export default class ActivityList extends Component {
     render() {
       console.log(this.props.data);
       return ( 
-          <div className="container">
-            <div className="jumbotron">        
-              <h1 className="display-4">Recent Activities:</h1>
-            </div>
-            <div className="row">
+          <Container>
+            <Row>
               {this.renderTweetRun()}
-            </div>
-          </div> 
+            </Row>
+          </Container> 
       )
     }
   }

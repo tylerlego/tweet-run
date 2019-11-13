@@ -1,17 +1,20 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route} from "react-router-dom";
-
+import { Container } from 'react-bootstrap';
 import Main from './components/main.component';
 
 function App() {
   return (
     <Router>
-      <div className="container">
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lumen/bootstrap.min.css"
+      />
+      <Container>
         {/*<Navbar />*/}
         <br/>
         <Route path="/" exact component={Main} />
-      </div>
+      </Container>
     </Router>
   );
 }

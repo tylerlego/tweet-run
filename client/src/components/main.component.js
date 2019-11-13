@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import querystring from 'querystring';
-import TweetRun from './tweet-run.component';
 import GettingActivities from './getting-activities.component';
 import ActivitiesFailed from './activities-failed.component';
 import ActivityList from './activity-list.component';
-import moment from 'moment-timezone';
 
 export default class Main extends Component {
   constructor(props) {
