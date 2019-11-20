@@ -42,7 +42,8 @@ function getStatuses(req, res, count) {
         user_screen_name: data[i].user.screen_name,
         user_description: data[i].user.description,
         user_url: data[i].user.url,
-        user_profile_background_image_url: data[i].user.profile_background_image_url
+        user_profile_background_image_url: data[i].user.profile_background_image_url,
+        urls: data[i].entities.urls
       });
 
       tweets.push(tweet);

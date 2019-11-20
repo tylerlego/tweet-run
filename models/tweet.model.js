@@ -32,6 +32,9 @@ const tweetSchema = new Schema({
     },  
     user_profile_background_image_url: {
         type: String
+    },
+    urls: {
+        type: Array
     }
 });
 
