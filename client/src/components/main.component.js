@@ -87,7 +87,7 @@ export default class Main extends Component {
         } else {
           tweets = this.state.tweets;
           activities = this.state.activities;
-  
+
           this.setTweetsInActivities(activities, tweets);
         }
       }

@@ -31,7 +31,17 @@ function getStatuses(req, res, count) {
   let tweets = [];
 
   T.get('statuses/user_timeline', options,  function (err, data, response) {
+
     for (let i = 0; i < data.length; i++) {
+      let tweet_urls;
+      let isReTweet = data[i].retweeted_status != null;
+      
+      if (isReTweet) {
+        tweet_urls = data[i].retweeted_status.entities.urls;
+      } else {
+        tweet_urls = data[i].entities.urls;
+      }
+
       const tweet = new Tweet({
         id: data[i].id,
         text: data[i].text,
@@ -43,8 +53,9 @@ function getStatuses(req, res, count) {
         user_description: data[i].user.description,
         user_url: data[i].user.url,
         user_profile_background_image_url: data[i].user.profile_background_image_url,
-        urls: data[i].entities.urls
-      });
+        urls: tweet_urls,
+        isReTweet: isReTweet
+      });  
 
       tweets.push(tweet);
     }

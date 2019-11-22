@@ -35,6 +35,9 @@ const tweetSchema = new Schema({
     },
     urls: {
         type: Array
+    },
+    isReTweet: {
+        type: Boolean
     }
 });
 

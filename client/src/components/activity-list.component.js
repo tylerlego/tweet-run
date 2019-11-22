@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Card, CardGroup, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
 import moment from 'moment';
 import TweetModal from './tweet-modal.component';
 

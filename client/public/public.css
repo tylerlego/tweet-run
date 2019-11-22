@@ -5,3 +5,12 @@
 .card-header {
     font-size: 1.5em
 }
+
+.tweet-info {
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.tweet-modal-body {
+    margin: 0 25px;
+}

@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button, Card, CardGroup, Modal } from 'react-bootstrap';
+// import { Link } from 'react-router-dom';
+import { Card, Button, Modal } from 'react-bootstrap';
 import moment from 'moment';
 
 export default class TweetModal extends Component {
-  constructor(props) {
-    super(props);
-
-  }
   componentDidCatch(error, info) {
     console.log(error);
     console.log(info);
@@ -16,16 +12,32 @@ export default class TweetModal extends Component {
   renderTweetInfo() {
     let tweetInfo = [];
 
-    for (let tweet of this.props.tweets) {
-      console.log(tweet.urls);
+
+    for (let tweet of this.props.tweets.reverse()) {
+      let tweet_link;
+      let tweet_date = moment(tweet.created_at).format('MMMM Do YYYY');
+      let tweet_time = moment(tweet.created_at).format('h:mm:ss a');
+
+      if (tweet.urls[0]) {
+        let url = {
+          pathname: tweet.urls[0].expanded_url
+        }
+
+        tweet_link = url.pathname;
+      } 
 
       tweetInfo.push(
-        <div className="tweet-info" key={tweet.id}>
-          <h4>{ moment(tweet.created_at).format('MMMM Do YYYY, h:mm:ss a') }</h4>
-          <p>
-            { tweet.text }
-          </p>
-        </div>
+        <Card key={tweet.id}>
+          <Card.Body>
+            <Card.Title>{ tweet_date }</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">{ tweet_time }</Card.Subtitle>
+            <Card.Text>
+              { tweet.text }
+            </Card.Text>
+            <Card.Link className="btn btn-small btn-success" href={tweet_link} target="_blank">View Tweet</Card.Link>
+            <Card.Link href="#">Another Link</Card.Link>
+          </Card.Body>
+        </Card>
       )
     }
 
@@ -36,7 +48,7 @@ export default class TweetModal extends Component {
     return (
       <Modal
         {...this.props}
-        size="lg"
+        size="md"
         centered
       >
         <Modal.Header closeButton>
@@ -44,7 +56,7 @@ export default class TweetModal extends Component {
             Tweets For Activity:
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="tweet-modal-body">
           { this.renderTweetInfo() }
         </Modal.Body>
         <Modal.Footer>
