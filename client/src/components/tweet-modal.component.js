@@ -35,7 +35,6 @@ export default class TweetModal extends Component {
               { tweet.text }
             </Card.Text>
             <Card.Link className="btn btn-small btn-success" href={tweet_link} target="_blank">View Tweet</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
           </Card.Body>
         </Card>
       )

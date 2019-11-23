@@ -14,3 +14,27 @@
 .tweet-modal-body {
     margin: 0 25px;
 }
+
+.strava-card {
+    border-color: rgb(110,110,110) !important;
+    box-shadow: 1.5px 1.5px 1.5px 1px rgba(0,0,0,0.3);
+}
+.strava-card-header {
+    background-color: rgb(75,65,65) !important;
+    color: white;
+    font-size: 1.7em;
+}
+.strava-card-title {
+    font-size: 1.6em !important;
+}
+.strava-card-text {
+    font-size: 1.2em !important;
+}
+.card-body {
+    background-color: rgb(240,240,240) !important;
+}
+
+.warm-grey {
+    background-color: rgba(252,97,0,.9) !important;
+}
+

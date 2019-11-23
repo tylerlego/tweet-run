@@ -44,16 +44,16 @@ export default class ActivityList extends Component {
 
         elements.push(
           <Col lg={4} key={i} >
-            <Card>
-              <Card.Header>{activity.name}</Card.Header>
-              <Card.Body>
-                <Card.Title>{moment(activity.start_date).format('MMMM Do YYYY')}</Card.Title>
-                <Card.Text>
+            <Card className="strava-card">
+              <Card.Header className="strava-card-header">{activity.name}</Card.Header>
+              <Card.Body className="strva-card-body">
+                <Card.Title className="strava-card-title">{moment(activity.start_date).format('MMMM Do YYYY')}</Card.Title>
+                <Card.Text className="strava-card-text">
                   {moment(activity.start_date).format('h:mm a')} - {moment(activity.end_date).format('h:mm a')}
                   <br />
                   {numTimesString}
                 </Card.Text>
-                <Button variant="primary" onClick={() => { this.handleShow(i) }}>View Tweets</Button>  
+                <Button variant="warning" onClick={() => { this.handleShow(i) }}>View Tweets</Button>  
               </Card.Body>
             </Card>
           </Col>

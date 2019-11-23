@@ -7,7 +7,7 @@ router.route('/').get((req,res) => {
   let token = req.query.t || null
 
   var options = {
-    url: 'https://www.strava.com/api/v3/athlete/activities?per_page=10',
+    url: 'https://www.strava.com/api/v3/athlete/activities?per_page=9',
     headers: {
       'Authorization': 'Bearer ' + token
     }
